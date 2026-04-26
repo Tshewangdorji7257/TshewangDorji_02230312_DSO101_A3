@@ -1008,8 +1008,8 @@ All 4 secrets visible (values hidden as dots)
    - No errors
 
 #### Expected Result
-✅ Complete CI/CD cycle works  
-✅ Code change → Live deployment in ~10 minutes  
+Complete CI/CD cycle works  
+Code change → Live deployment in ~10 minutes  
 ✅ Zero manual intervention
 
 ---
