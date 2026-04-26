@@ -1010,7 +1010,7 @@ All 4 secrets visible (values hidden as dots)
 #### Expected Result
 Complete CI/CD cycle works  
 Code change → Live deployment in ~10 minutes  
-✅ Zero manual intervention
+Zero manual intervention
 
 ---
 
