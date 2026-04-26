@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: be-todo
+    env: docker
+    plan: free
+    dockerfilePath: ./backend/Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: DB_PATH
+        value: /tmp/todos.json
+
+  - type: web
+    name: fe-todo
+    env: docker
+    plan: free
+    dockerfilePath: ./frontend/Dockerfile
+    autoDeploy: true
+    envVars:
+      - key: PORT
+        value: 3000
+      - key: VITE_API_URL
+        value: https://be-todo.onrender.com
+      - key: REACT_APP_API_URL
+        value: https://be-todo.onrender.com
