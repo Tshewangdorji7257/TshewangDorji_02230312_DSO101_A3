@@ -1,4 +1,5 @@
 import express from "express";
+import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -16,9 +17,7 @@ console.log("================================");
 // Middleware to inject API URL into index.html
 app.use((req, res, next) => {
   if (req.url === "/" || req.url === "/index.html") {
-    // Read the built index.html
     const indexPath = path.join(__dirname, "dist", "index.html");
-    const fs = require("fs");
     
     fs.readFile(indexPath, "utf8", (err, data) => {
       if (err) {
@@ -26,7 +25,6 @@ app.use((req, res, next) => {
         return res.status(500).send("Error loading app");
       }
 
-      // Inject config script before the React app script
       const configScript = `<script>
         window.__APP_CONFIG__ = window.__APP_CONFIG__ || {
           API_URL: "${API_URL}"
@@ -44,16 +42,22 @@ app.use((req, res, next) => {
   }
 });
 
-// Serve static files
-app.use(express.static(path.join(__dirname, "dist")));
+// Serve static files with proper cache headers
+app.use(express.static(path.join(__dirname, "dist"), {
+  setHeaders: (res, filePath) => {
+    if (filePath.endsWith(".html")) {
+      res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+    }
+  }
+}));
 
 // SPA fallback
 app.get("*", (req, res) => {
   const indexPath = path.join(__dirname, "dist", "index.html");
-  const fs = require("fs");
   
   fs.readFile(indexPath, "utf8", (err, data) => {
     if (err) {
+      console.error("Error reading index.html for fallback:", err);
       return res.status(500).send("Error loading app");
     }
 
