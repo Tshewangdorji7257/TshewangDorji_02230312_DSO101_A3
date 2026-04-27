@@ -48,8 +48,8 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-frontend:latest
           build-args: |
-            VITE_API_URL=https://be-todo.onrender.com
-            REACT_APP_API_URL=https://be-todo.onrender.com
+            VITE_API_URL=https://todo-backend-test-0srz.onrender.com
+            REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
@@ -70,9 +70,9 @@ jobs:
       # 8. Notify on Success
       - name: Deployment Success
         if: success()
-        run: echo "✅ Docker images built, pushed to DockerHub, and Render deployment triggered successfully!"
+        run: echo " Docker images built, pushed to DockerHub, and Render deployment triggered successfully!"
 
       # 9. Notify on Failure
       - name: Deployment Failed
         if: failure()
-        run: echo "❌ Deployment failed. Please check the logs above."
+        run: echo " Deployment failed. Please check the logs above."
