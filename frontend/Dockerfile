@@ -2,6 +2,9 @@ FROM node:20-alpine AS build
 
 WORKDIR /app
 
+# Add build argument to break cache on every deploy
+ARG BUILD_TIME=unknown
+
 # Copy package files from frontend directory
 COPY ./frontend/package*.json ./
 

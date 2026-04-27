@@ -48,6 +48,7 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-frontend:latest
           build-args: |
+            BUILD_TIME=${{ github.sha }}
             VITE_API_URL=https://todo-backend-test-0srz.onrender.com
             REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
           cache-from: type=gha
