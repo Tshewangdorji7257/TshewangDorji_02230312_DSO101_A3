@@ -32,15 +32,17 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Install serve to run the static site
-RUN npm install -g serve
+# Copy package files from frontend directory
+COPY ./frontend/package*.json ./
+
+# Install dependencies
+RUN npm install --legacy-peer-deps
 
 # Copy built application from build stage
 COPY --from=build /app/dist ./dist
 
-# Copy entrypoint script
-COPY ./frontend/entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+# Copy server file
+COPY ./frontend/server.js ./
 
 # Set environment variables that can be overridden at runtime
 ENV PORT=3000
@@ -49,4 +51,4 @@ ENV REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
 
 EXPOSE 3000
 
-ENTRYPOINT ["/app/entrypoint.sh"]
+CMD ["node", "server.js"]
