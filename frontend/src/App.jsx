@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// Force rebuild - Updated with cache busting
 const runtimeApiUrl =
   typeof window !== "undefined"
     ? window.__APP_CONFIG__?.API_URL
