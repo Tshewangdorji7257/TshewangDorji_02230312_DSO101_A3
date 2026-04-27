@@ -36,6 +36,9 @@ export default function App() {
   }
 
   useEffect(() => {
+    console.log("App mounted - API Configuration:");
+    console.log("  window.__APP_CONFIG__:", window.__APP_CONFIG__);
+    console.log("  Resolved API_URL:", API_URL);
     fetchTasks();
   }, []);
 
