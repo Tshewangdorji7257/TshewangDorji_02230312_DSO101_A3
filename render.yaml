@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: be-todo
+    name: todo-backend-test
     env: docker
     plan: free
     dockerfilePath: ./backend/Dockerfile
@@ -12,7 +12,7 @@ services:
         value: /tmp/todos.json
 
   - type: web
-    name: fe-todo
+    name: todo-frontend-test
     env: docker
     plan: free
     dockerfilePath: ./frontend/Dockerfile
