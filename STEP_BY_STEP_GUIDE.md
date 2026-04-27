@@ -256,7 +256,7 @@ Verify configuration:
 ```yaml
 services:
   - type: web
-    name: be-todo           # ✅ Backend service
+    name: be-todo           #  Backend service
     env: docker
     plan: free
     dockerfilePath: ./backend/Dockerfile
