@@ -35,7 +35,11 @@ RUN npm install -g serve
 # Copy built application from build stage
 COPY --from=build /app/dist ./dist
 
+# Copy entrypoint script
+COPY ./frontend/entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
+
 ENV PORT=3000
 EXPOSE 3000
 
-CMD ["serve", "-s", "dist", "-l", "3000"]
+ENTRYPOINT ["/app/entrypoint.sh"]
