@@ -10,7 +10,7 @@ const API_URL =
   runtimeApiUrl ||
   import.meta.env.VITE_API_URL ||
   import.meta.env.REACT_APP_API_URL ||
-  "http://localhost:5000";
+  "https://todo-backend-test-0srz.onrender.com";  // Updated default to production backend
 
 export default function App() {
   const TASKS_PER_PAGE = 5;
