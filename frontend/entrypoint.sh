@@ -12,5 +12,5 @@ EOF
 
 echo "✓ config.js generated with API_URL: ${API_URL}"
 
-# Start the server
-exec serve -s dist -l ${PORT:-3000}
+# Start the server with cache-busting headers
+exec serve -s dist -l ${PORT:-3000} --no-clipboard --no-port-switching
