@@ -24,12 +24,14 @@ export default function App() {
   async function fetchTasks() {
     setError("");
     try {
+      console.log("Fetching from API URL:", API_URL);
       const response = await fetch(`${API_URL}/tasks`);
-      if (!response.ok) throw new Error("Failed to fetch tasks");
+      if (!response.ok) throw new Error(`Failed to fetch tasks: ${response.status}`);
       const data = await response.json();
       setTasks(data);
-    } catch {
-      setError("Unable to fetch tasks. Ensure backend is running.");
+    } catch (err) {
+      console.error("Fetch error:", err);
+      setError(`Unable to fetch tasks. Backend: ${API_URL} | Error: ${err.message}`);
     }
   }
 
