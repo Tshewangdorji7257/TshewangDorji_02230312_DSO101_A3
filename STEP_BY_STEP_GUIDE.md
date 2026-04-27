@@ -967,7 +967,7 @@ All 4 secrets visible (values hidden as dots)
    - **D**elete: Remove todo ✅
 
 #### Expected Result
-✅ Frontend loads without errors  
+Frontend loads without errors  
 ✅ Backend API responds  
 ✅ CRUD operations work  
 ✅ Data persists across page refresh
