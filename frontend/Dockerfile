@@ -42,7 +42,11 @@ COPY --from=build /app/dist ./dist
 COPY ./frontend/entrypoint.sh /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
 
+# Set environment variables that can be overridden at runtime
 ENV PORT=3000
+ENV VITE_API_URL=https://todo-backend-test-0srz.onrender.com
+ENV REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
+
 EXPOSE 3000
 
 ENTRYPOINT ["/app/entrypoint.sh"]
