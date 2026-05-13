@@ -24,6 +24,21 @@ app.use((req, res, next) => {
   next();
 });
 
+// Root endpoint
+app.get("/", (_req, res) => {
+  res.json({ 
+    message: "Todo Backend API",
+    status: "running",
+    version: "1.0.0",
+    endpoints: {
+      health: "/health",
+      tasks: "/tasks",
+      taskById: "/tasks/:id"
+    },
+    timestamp: new Date().toISOString()
+  });
+});
+
 // Health check endpoint
 app.get("/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });

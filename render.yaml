@@ -9,7 +9,9 @@ services:
       - key: PORT
         value: 5000
       - key: DB_PATH
-        value: /tmp/todos.json
+        value: /app/data/todos.db
+      - key: NODE_ENV
+        value: production
 
   - type: web
     name: todo-frontend-test

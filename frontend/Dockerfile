@@ -32,23 +32,18 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy package files from frontend directory
-COPY ./frontend/package*.json ./
-
-# Install dependencies
-RUN npm install --legacy-peer-deps
+# Install serve to run the static site
+RUN npm install -g serve
 
 # Copy built application from build stage
 COPY --from=build /app/dist ./dist
 
-# Copy server file
-COPY ./frontend/server.js ./
+# Create simple config with environment variables
+RUN echo "window.__APP_CONFIG__ = { API_URL: '$(echo $VITE_API_URL)' };" > dist/config.js
 
-# Set environment variables that can be overridden at runtime
 ENV PORT=3000
 ENV VITE_API_URL=https://todo-backend-test-0srz.onrender.com
-ENV REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+CMD ["serve", "-s", "dist", "-l", "3000"]

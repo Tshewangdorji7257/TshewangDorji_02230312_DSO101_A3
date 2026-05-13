@@ -11,11 +11,11 @@ RUN npm install
 # Copy application source code
 COPY ./backend/src ./src
 
-# Ensure tmp directory exists and is writable
-RUN mkdir -p /tmp && chmod 777 /tmp
+# Create data directory for database
+RUN mkdir -p /app/data /tmp && chmod 777 /app/data /tmp
 
 ENV PORT=5000
-ENV DB_PATH=/tmp/todos.json
+ENV DB_PATH=/app/data/todos.db
 ENV NODE_ENV=production
 
 EXPOSE 5000
