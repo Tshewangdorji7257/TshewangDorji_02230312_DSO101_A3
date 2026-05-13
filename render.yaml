@@ -1,10 +1,9 @@
 services:
   - type: web
     name: dso101-backend
-    env: docker
-    dockerfilePath: ./backend/Dockerfile
+    image:
+      url: docker.io/tshewang7/dso101-backend:latest
     plan: free
-    autoDeploy: true
     envVars:
       - key: PORT
         value: 5000
@@ -15,10 +14,9 @@ services:
 
   - type: web
     name: dso101-frontend
-    env: docker
-    dockerfilePath: ./frontend/Dockerfile
+    image:
+      url: docker.io/tshewang7/dso101-frontend:latest
     plan: free
-    autoDeploy: true
     envVars:
       - key: PORT
         value: 3000
