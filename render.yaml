@@ -2,7 +2,7 @@ services:
   - type: web
     name: todo-backend-test
     image:
-      url: tshewang7/todo-backend:v1.2
+      url: tshewang7/todo-backend:v1.3
     plan: free
     envVars:
       - key: PORT
