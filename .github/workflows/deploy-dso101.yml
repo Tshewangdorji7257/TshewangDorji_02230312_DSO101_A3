@@ -52,8 +52,8 @@ jobs:
             ${{ secrets.DOCKERHUB_USERNAME }}/dso101-frontend:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/dso101-frontend:${{ github.sha }}
           build-args: |
-            VITE_API_URL=https://dso101-backend.onrender.com
-            REACT_APP_API_URL=https://dso101-backend.onrender.com
+            VITE_API_URL=https://todo-backend-test-0srz.onrender.com
+            REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
