@@ -889,9 +889,8 @@ GitHub Actions Triggered
 
 ### 2. GitHub Secrets Configuration
 
-![alt text](image.png)
+![alt text](Asset/image.png)
 
-![Secrets Setup](Asset/image-1.png)
 
 **Description**:
 - DOCKERHUB_USERNAME configured
@@ -903,7 +902,7 @@ GitHub Actions Triggered
 
 ### 3. Workflow Execution - Build Success
 
-![alt text](image-1.png)
+![alt text](Asset/image-1.png)
 
 **Description**:
 - GitHub Actions build pipeline completed
@@ -915,7 +914,7 @@ GitHub Actions Triggered
 
 ### 4. Backend Docker Image Build
 
-![alt text](image-2.png)
+![alt text](Asset/image-2.png)
 
 **Description**:
 - Backend image built successfully
@@ -927,7 +926,7 @@ GitHub Actions Triggered
 
 ### 5. Frontend Docker Image Build
 
-![alt text](image-3.png)
+![alt text](Asset/image-3.png)
 
 **Description**:
 - Frontend multi-stage build complete
@@ -939,7 +938,7 @@ GitHub Actions Triggered
 
 ### 6. Docker Hub Repository - Backend
 
-![alt text](image-5.png)
+![alt text](Asset/image-5.png)
 
 **Description**:
 - Docker Hub repository created
@@ -951,7 +950,7 @@ GitHub Actions Triggered
 
 ### 7. Docker Hub Repository - Frontend
 
-![alt text](image-4.png)
+![alt text](Asset/image-4.png)
 
 **Description**:
 - Docker Hub repository created
@@ -963,7 +962,7 @@ GitHub Actions Triggered
 
 ### 8. Render.com - Backend Service
 
-![alt text](image-6.png)
+![alt text](Asset/image-6.png)
 
 **Description**:
 - Render backend service dashboard
@@ -975,7 +974,7 @@ GitHub Actions Triggered
 
 ### 9. Render.com - Frontend Service
 
-![alt text](image-7.png)
+![alt text](Asset/image-7.png)
 
 **Description**:
 - Render frontend service dashboard
@@ -987,7 +986,7 @@ GitHub Actions Triggered
 
 ### 11. GitHub Actions - Workflow History
 
-![alt text](image-8.png)
+![alt text](Asset/image-8.png)
 
 **Description**:
 - Multiple successful workflow runs
