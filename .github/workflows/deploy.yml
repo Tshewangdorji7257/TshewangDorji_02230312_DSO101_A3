@@ -1,79 +1,79 @@
-name: Build, Push to DockerHub & Deploy to Render
+# name: Build, Push to DockerHub & Deploy to Render
 
-on:
-  push:
-    branches: ["main"]
+# on:
+#   push:
+#     branches: ["main"]
 
-env:
-  DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
-  DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
+# env:
+#   DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+#   DOCKERHUB_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+# jobs:
+#   build-and-deploy:
+#     runs-on: ubuntu-latest
     
-    steps:
-      # 1. Checkout code
-      - name: Checkout Repository
-        uses: actions/checkout@v5
+#     steps:
+#       # 1. Checkout code
+#       - name: Checkout Repository
+#         uses: actions/checkout@v5
 
-      # 2. Set up Docker
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4
+#       # 2. Set up Docker
+#       - name: Set up Docker Buildx
+#         uses: docker/setup-buildx-action@v4
 
-      # 3. Login to DockerHub
-      - name: Login to DockerHub
-        uses: docker/login-action@v4
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#       # 3. Login to DockerHub
+#       - name: Login to DockerHub
+#         uses: docker/login-action@v4
+#         with:
+#           username: ${{ secrets.DOCKERHUB_USERNAME }}
+#           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      # 4. Build and Push Backend Docker Image
-      - name: Build and Push Backend Image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./backend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:latest
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+#       # 4. Build and Push Backend Docker Image
+#       - name: Build and Push Backend Image
+#         uses: docker/build-push-action@v6
+#         with:
+#           context: .
+#           file: ./backend/Dockerfile
+#           push: true
+#           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-backend:latest
+#           cache-from: type=gha
+#           cache-to: type=gha,mode=max
 
-      # 5. Build and Push Frontend Docker Image
-      - name: Build and Push Frontend Image
-        uses: docker/build-push-action@v6
-        with:
-          context: .
-          file: ./frontend/Dockerfile
-          push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-frontend:latest
-          build-args: |
-            BUILD_TIME=${{ github.sha }}
-            VITE_API_URL=https://todo-backend-test-0srz.onrender.com
-            REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+#       # 5. Build and Push Frontend Docker Image
+#       - name: Build and Push Frontend Image
+#         uses: docker/build-push-action@v6
+#         with:
+#           context: .
+#           file: ./frontend/Dockerfile
+#           push: true
+#           tags: ${{ secrets.DOCKERHUB_USERNAME }}/todo-frontend:latest
+#           build-args: |
+#             BUILD_TIME=${{ github.sha }}
+#             VITE_API_URL=https://todo-backend-test-0srz.onrender.com
+#             REACT_APP_API_URL=https://todo-backend-test-0srz.onrender.com
+#           cache-from: type=gha
+#           cache-to: type=gha,mode=max
 
-      # 6. Trigger Render Deployment (Backend)
-      - name: Trigger Render Backend Deployment
-        if: success()
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL_BACKEND }} \
-            -H "Content-Type: application/json"
+#       # 6. Trigger Render Deployment (Backend)
+#       - name: Trigger Render Backend Deployment
+#         if: success()
+#         run: |
+#           curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL_BACKEND }} \
+#             -H "Content-Type: application/json"
 
-      # 7. Trigger Render Deployment (Frontend)
-      - name: Trigger Render Frontend Deployment
-        if: success()
-        run: |
-          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL_FRONTEND }} \
-            -H "Content-Type: application/json"
+#       # 7. Trigger Render Deployment (Frontend)
+#       - name: Trigger Render Frontend Deployment
+#         if: success()
+#         run: |
+#           curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL_FRONTEND }} \
+#             -H "Content-Type: application/json"
 
-      # 8. Notify on Success
-      - name: Deployment Success
-        if: success()
-        run: echo " Docker images built, pushed to DockerHub, and Render deployment triggered successfully!"
+#       # 8. Notify on Success
+#       - name: Deployment Success
+#         if: success()
+#         run: echo " Docker images built, pushed to DockerHub, and Render deployment triggered successfully!"
 
-      # 9. Notify on Failure
-      - name: Deployment Failed
-        if: failure()
-        run: echo " Deployment failed. Please check the logs above."
+#       # 9. Notify on Failure
+#       - name: Deployment Failed
+#         if: failure()
+#         run: echo " Deployment failed. Please check the logs above."
