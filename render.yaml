@@ -1,26 +1,26 @@
 services:
   - type: web
-    name: dso101-backend
-    image:
-      url: docker.io/tshewang7/dso101-backend:latest
+    name: todo-backend-test
+    env: docker
     plan: free
+    dockerfilePath: ./backend/Dockerfile
+    autoDeploy: true
     envVars:
       - key: PORT
         value: 5000
       - key: DB_PATH
-        value: /app/data/todos.db
-      - key: NODE_ENV
-        value: production
+        value: /tmp/todos.json
 
   - type: web
-    name: dso101-frontend
-    image:
-      url: docker.io/tshewang7/dso101-frontend:latest
+    name: todo-frontend-test
+    env: docker
     plan: free
+    dockerfilePath: ./frontend/Dockerfile
+    autoDeploy: true
     envVars:
       - key: PORT
         value: 3000
       - key: VITE_API_URL
-        value: https://dso101-backend.onrender.com
+        value: https://todo-backend-test-0srz.onrender.com
       - key: REACT_APP_API_URL
-        value: https://dso101-backend.onrender.com
+        value: https://todo-backend-test-0srz.onrender.com
