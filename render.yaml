@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: todo-backend-test
+    name: dsoa3-backend-latest
     env: docker
     plan: free
     dockerfilePath: ./backend/Dockerfile
@@ -12,7 +12,7 @@ services:
         value: /tmp/todos.json
 
   - type: web
-    name: todo-frontend-test
+    name: dsoa3-frontend-latest
     env: docker
     plan: free
     dockerfilePath: ./frontend/Dockerfile
@@ -21,6 +21,6 @@ services:
       - key: PORT
         value: 3000
       - key: VITE_API_URL
-        value: https://todo-backend-test-0srz.onrender.com
+        value: https://dsoa3-backend-latest.onrender.com
       - key: REACT_APP_API_URL
-        value: https://todo-backend-test-0srz.onrender.com
+        value: https://dsoa3-backend-latest.onrender.com
