@@ -1,19 +1,22 @@
 import { useEffect, useState } from "react";
 
-// Force rebuild - Updated with cache busting
-const runtimeApiUrl =
-  typeof window !== "undefined"
-    ? window.__APP_CONFIG__?.API_URL
-    : undefined;
-
-const API_URL =
-  runtimeApiUrl ||
-  import.meta.env.VITE_API_URL ||
-  import.meta.env.REACT_APP_API_URL ||
-  "https://todo-backend-test-0srz.onrender.com";  // Updated default to production backend
+// Get API URL dynamically, checking config.js, env vars, and fallback
+function getApiUrl() {
+  if (typeof window !== "undefined" && window.__APP_CONFIG__?.API_URL) {
+    return window.__APP_CONFIG__.API_URL;
+  }
+  if (import.meta.env.VITE_API_URL) {
+    return import.meta.env.VITE_API_URL;
+  }
+  if (import.meta.env.REACT_APP_API_URL) {
+    return import.meta.env.REACT_APP_API_URL;
+  }
+  return "https://dsoa3-backend-latest.onrender.com";
+}
 
 export default function App() {
   const TASKS_PER_PAGE = 5;
+  const API_URL = getApiUrl();
 
   const [tasks, setTasks] = useState([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
