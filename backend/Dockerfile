@@ -3,13 +3,13 @@ FROM node:20-alpine
 WORKDIR /app
 
 # Copy package files from backend directory
-COPY ./backend/package*.json ./
+COPY package*.json ./
 
 # Install dependencies
 RUN npm install
 
 # Copy application source code
-COPY ./backend/src ./src
+COPY src ./src
 
 # Ensure tmp directory exists and is writable
 RUN mkdir -p /tmp && chmod 777 /tmp
