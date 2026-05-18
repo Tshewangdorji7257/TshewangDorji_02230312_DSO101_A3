@@ -40,8 +40,8 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v2
         with:
-          username: tshewang7
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and Push Backend Image
         uses: docker/build-push-action@v4
@@ -59,11 +59,11 @@ jobs:
 
       - name: Trigger Render Backend Deployment
         run: |
-          curl -X POST ${{ secrets.RENDER_BACKEND_WEBHOOK }}
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL_BACKEND }}
 
       - name: Trigger Render Frontend Deployment
         run: |
-          curl -X POST ${{ secrets.RENDER_FRONTEND_WEBHOOK }}
+          curl -X POST ${{ secrets.RENDER_DEPLOY_HOOK_URL_FRONTEND }}
 
       - name: Deployment Success
         run: echo "✅ Deployment completed successfully"
