@@ -3,7 +3,8 @@ services:
     name: dsoa3-backend-latest
     env: docker
     plan: free
-    dockerfilePath: ./backend/Dockerfile
+    image:
+      url: docker.io/tshewang7/dso101-backend:latest
     autoDeploy: true
     envVars:
       - key: PORT
@@ -15,7 +16,8 @@ services:
     name: dsoa3-frontend-latest
     env: docker
     plan: free
-    dockerfilePath: ./frontend/Dockerfile
+    image:
+      url: docker.io/tshewang7/dso101-frontend:latest
     autoDeploy: true
     envVars:
       - key: PORT
